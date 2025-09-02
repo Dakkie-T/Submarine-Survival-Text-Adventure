@@ -1,22 +1,16 @@
-class Outpost:
-    def __init__(self, name, description="", supplies=None, services=None):
-        self.name = name
-        self.description = description
-        self.supplies = supplies if supplies else {}
-        self.services = services if services else []
 
-    def describe(self):
-        """Return a text description of the outpost."""
-        return f"{self.name}: {self.description}"
+# severity.py - defines random severity and polarity for events
 
-    def list_supplies(self):
-        """Return available supplies at this outpost."""
-        if not self.supplies:
-            return "No supplies available."
-        return "\n".join([f"{item}: {amount}" for item, amount in self.supplies.items()])
+import random
 
-    def list_services(self):
-        """Return available services at this outpost."""
-        if not self.services:
-            return "No services offered."
-        return ", ".join(self.services)
+# Polarity: 0 = bad, 1 = good, 2 = neutral
+_polarity_map = {"b": 0, "g": 1, "n": 2}
+_severity_map = {"l": 0, "m": 1, "h": 2}
+
+# Randomly choose initial values
+_polarity_choice = random.choice(list(_polarity_map.keys()))
+_severity_choice = random.choice(list(_severity_map.keys()))
+
+# Expose as module-level variables
+polarity = _polarity_map[_polarity_choice]
+severity = _severity_map[_severity_choice]
