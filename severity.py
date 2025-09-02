@@ -1,19 +1,22 @@
-import random
-polarity=random.choice("gbn")
-severity=random.choice("lmh")
-if polarity=="g":
-    polarity=1
-elif polarity=="b":
-    polarity=0
-elif polarity=="n":
-    polarity=2
-else:
-    polarity="smth went wrong"
-if severity=="m":
-    severity=1
-elif severity=="l":
-    severity=0
-elif severity=="h":
-    severity=2
-else:
-    polarity="smth went wrong"
+class Outpost:
+    def __init__(self, name, description="", supplies=None, services=None):
+        self.name = name
+        self.description = description
+        self.supplies = supplies if supplies else {}
+        self.services = services if services else []
+
+    def describe(self):
+        """Return a text description of the outpost."""
+        return f"{self.name}: {self.description}"
+
+    def list_supplies(self):
+        """Return available supplies at this outpost."""
+        if not self.supplies:
+            return "No supplies available."
+        return "\n".join([f"{item}: {amount}" for item, amount in self.supplies.items()])
+
+    def list_services(self):
+        """Return available services at this outpost."""
+        if not self.services:
+            return "No services offered."
+        return ", ".join(self.services)
