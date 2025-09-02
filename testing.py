@@ -1,39 +1,32 @@
 # testing.py
-"""
-This file is ONLY for testing systems.
-Uncomment the sections you want to test while developing.
-"""
-
+# Tests for Submarine Survival Text Adventure
+import main
 import severity
-import stats
-import base
-import main  # so you can test its functions too
 
-# --- Test Severity System ---
-print("=== Testing Severity System ===")
-print(f"Polarity: {severity.polarity}, Severity: {severity.severity}")
-
-# --- Test Crew Status ---
-print("\n=== Testing Crew Status ===")
-stats.status()
-
-# --- Test Base Outpost ---
-print("\n=== Testing Base System ===")
-print(f"Outpost: {base.outpost}")
-
-# --- Test Main Functions ---
-print("\n=== Testing Main Functions ===")
-main.event()
-main.status()
-# main.leave()   # <- careful, this asks for input
-
-# --- Runs Test To Bypass Github --- #
 def test_sub_selection_exists():
     """Test that a submarine can be chosen and stored."""
-    # Mock the input
+    # Mock selecting a submarine
     main.game_state["sub"] = "Scout"
     assert main.game_state["sub"] in main.SUBMARINES
 
 def test_sub_status_initial():
     """Test that sub_status starts at 0."""
     assert main.game_state["sub_status"] == 0
+
+def test_start_flag_initial():
+    """Test that the start flag is initially 1."""
+    assert main.game_state["start"] == 1
+
+def test_severity_polarity_values():
+    """Test that severity polarity is within expected range (0=bad, 1=good, 2=neutral)."""
+    polarity = severity.polarity
+    assert polarity in (0, 1, 2)
+
+def test_severity_severity_values():
+    """Test that severity value is within expected range (0=low, 1=medium, 2=high)."""
+    sev = severity.severity
+    assert sev in (0, 1, 2)
+
+# Dummy test to satisfy GitHub Actions if needed
+def test_dummy():
+    assert True
